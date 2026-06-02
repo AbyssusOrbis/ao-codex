@@ -443,7 +443,7 @@ html,body{
 
 <script>
 // ── PASSWORD ────────────────────────────────
-const PASSWORD = "alba";  // ← ここを変更してください
+const PASSWORD = "Abyssus";  // ← ここを変更してください
 
 function unlock(){
   const val = document.getElementById('pw').value;
@@ -582,12 +582,21 @@ function parseMarkdown(md){
 
     // list
     if(line.startsWith('- ') || line.startsWith('・')){
-      const text = line.startsWith('- ') ? line.slice(2) : line.slice(1);
+      let text = line.startsWith('- ') ? line.slice(2) : line.slice(1);
+      text = text
+        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g,'<em>$1</em>')
+        .replace(/`(.+?)`/g,'<code>$1</code>');
       html += `<li>${text}</li>`;
       continue;
     }
     if(/^\d+\. /.test(line)){
-      html += `<li>${line.replace(/^\d+\. /,'')}</li>`;
+      let text = line.replace(/^\d+\. /,'');
+      text = text
+        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g,'<em>$1</em>')
+        .replace(/`(.+?)`/g,'<code>$1</code>');
+      html += `<li>${text}</li>`;
       continue;
     }
 
