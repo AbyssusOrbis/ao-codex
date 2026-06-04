@@ -414,11 +414,58 @@ html,body{
   .chapter{ padding:80px 6% 100px; }
 }
 </style>
+  /* ── BGM CONTROL ─────────────────────────── */
+#bgm-control{
+  position:fixed;
+  bottom:24px; right:24px;
+  z-index:200;
+  display:flex; align-items:center; gap:10px;
+  background:rgba(7,7,8,0.75);
+  border:1px solid var(--line-strong);
+  padding:8px 14px;
+  backdrop-filter:blur(8px);
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+#bgm-control.visible{ opacity:1; }
+
+#bgm-mute{
+  background:transparent;
+  border:none;
+  color:var(--fg-3);
+  font-size:14px;
+  cursor:pointer;
+  padding:0;
+  transition:color 0.3s;
+  line-height:1;
+}
+#bgm-mute:hover{ color:var(--accent); }
+
+#bgm-slider{
+  -webkit-appearance:none;
+  appearance:none;
+  width:72px; height:1px;
+  background:var(--line-strong);
+  outline:none;
+  cursor:pointer;
+}
+#bgm-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--accent-dim);
+  cursor:pointer;
+}
 </head>
 <body>
 <audio id="bgm" loop preload="auto">
   <source src="bgm.mp3" type="audio/mpeg">
 </audio>
+  <div id="bgm-control">
+  <button id="bgm-mute" onclick="toggleMute()">♪</button>
+  <input id="bgm-slider" type="range" min="0" max="1" step="0.01" value="0.6"
+    oninput="changeVolume(this.value)">
+</div>
 <!-- LOCK SCREEN -->
 <div id="lock">
   <div class="lock-ornament top"></div>
@@ -479,12 +526,27 @@ function unlock(){
         bgm.volume = vol;
         if(vol >= 0.6) clearInterval(fade);
       }, 100);
+        document.getElementById('bgm-control').classList.add('visible');
     }).catch(() => {});
 
   } else {
     err.textContent = '── 響きが合わない ──';
     document.getElementById('pw').value = '';
   }
+}
+  function toggleMute(){
+  const bgm  = document.getElementById('bgm');
+  const btn  = document.getElementById('bgm-mute');
+  bgm.muted  = !bgm.muted;
+  btn.textContent = bgm.muted ? '✕' : '♪';
+  btn.style.color = bgm.muted ? 'rgba(245,244,240,0.2)' : '';
+}
+
+function changeVolume(val){
+  const bgm = document.getElementById('bgm');
+  bgm.volume = val;
+  bgm.muted  = (val == 0);
+  document.getElementById('bgm-mute').textContent = (val == 0) ? '✕' : '♪';
 }
 document.getElementById('pw').addEventListener('keydown', e=>{
   if(e.key==='Enter') unlock();
