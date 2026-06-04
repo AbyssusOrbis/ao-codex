@@ -4,11 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Abyssus Orbis ── 聖典</title>
-  <!-- OG / SNS プレビュー -->
 <meta property="og:type"         content="website" />
 <meta property="og:url"          content="https://abyssusorbis.github.io/ao-codex/ao_codex.html" />
 <meta property="og:title"        content="Abyssus Orbis ── 聖典" />
-<meta property="og:description" content="白と黒、響きと記憶が交わる概念世界。&#10;その輪郭が、ここに刻まれている。" />
+<meta property="og:description"  content="白と黒、響きと記憶が交わる概念世界。&#10;その輪郭が、ここに刻まれている。" />
 <meta property="og:image"        content="https://abyssusorbis.github.io/ao-codex/logo.png" />
 <meta property="og:image:width"  content="1254" />
 <meta property="og:image:height" content="1254" />
@@ -28,23 +27,18 @@
   --bg-1:#0c0c0e;
   --bg-2:#13131a;
   --bg-3:#1a1a24;
-
   --fg-0:#f5f4f0;
   --fg-1:rgba(245,244,240,0.78);
   --fg-2:rgba(245,244,240,0.55);
   --fg-3:rgba(245,244,240,0.28);
-
   --line:rgba(245,244,240,0.08);
   --line-strong:rgba(245,244,240,0.18);
-
   --accent:#e8e3d3;
   --accent-dim:rgba(232,227,211,0.45);
   --accent-glow:rgba(232,227,211,0.10);
-
   --serif-jp:'Noto Serif JP',serif;
   --serif-en:'Cormorant Garamond',serif;
   --display:'Cinzel',serif;
-
   --sidebar-w:280px;
 }
 
@@ -351,20 +345,10 @@ html,body{
   line-height:1.9;
 }
 
-.chapter strong{
-  color:var(--fg-0);
-  font-weight:400;
-}
+.chapter strong{ color:var(--fg-0); font-weight:400; }
+.chapter em{ font-style:italic; color:var(--accent-dim); }
 
-.chapter em{
-  font-style:italic;
-  color:var(--accent-dim);
-}
-
-.chapter ul, .chapter ol{
-  padding-left:20px;
-  margin:16px 0;
-}
+.chapter ul, .chapter ol{ padding-left:20px; margin:16px 0; }
 .chapter li{
   font-size:13px;
   line-height:2.2;
@@ -372,7 +356,6 @@ html,body{
   letter-spacing:0.05em;
 }
 
-/* chapter top ornament */
 .chapter-eyebrow{
   font-family:var(--display);
   font-size:9px;
@@ -413,8 +396,8 @@ html,body{
   #toggle{ display:flex; }
   .chapter{ padding:80px 6% 100px; }
 }
-</style>
-  /* ── BGM CONTROL ─────────────────────────── */
+
+/* ── BGM CONTROL ─────────────────────────── */
 #bgm-control{
   position:fixed;
   bottom:24px; right:24px;
@@ -456,16 +439,20 @@ html,body{
   background:var(--accent-dim);
   cursor:pointer;
 }
+</style>
 </head>
 <body>
+
 <audio id="bgm" loop preload="auto">
   <source src="bgm.mp3" type="audio/mpeg">
 </audio>
-  <div id="bgm-control">
+
+<div id="bgm-control">
   <button id="bgm-mute" onclick="toggleMute()">♪</button>
   <input id="bgm-slider" type="range" min="0" max="1" step="0.01" value="0.6"
     oninput="changeVolume(this.value)">
 </div>
+
 <!-- LOCK SCREEN -->
 <div id="lock">
   <div class="lock-ornament top"></div>
@@ -500,13 +487,11 @@ html,body{
   </nav>
 
   <main id="main">
-    <!-- chapters injected by JS -->
   </main>
 </div>
 
 <script>
-// ── PASSWORD ────────────────────────────────
-const PASSWORD = "Abyssus";  // ← ここを変更してください
+const PASSWORD = "Abyssus";
 
 function unlock(){
   const val = document.getElementById('pw').value;
@@ -515,8 +500,6 @@ function unlock(){
     document.getElementById('lock').classList.add('hidden');
     document.getElementById('app').classList.add('visible');
     err.textContent = '';
-
-    // BGM フェードイン
     const bgm = document.getElementById('bgm');
     bgm.volume = 0;
     bgm.play().then(() => {
@@ -526,18 +509,18 @@ function unlock(){
         bgm.volume = vol;
         if(vol >= 0.6) clearInterval(fade);
       }, 100);
-        document.getElementById('bgm-control').classList.add('visible');
+      document.getElementById('bgm-control').classList.add('visible');
     }).catch(() => {});
-
   } else {
     err.textContent = '── 響きが合わない ──';
     document.getElementById('pw').value = '';
   }
 }
-  function toggleMute(){
-  const bgm  = document.getElementById('bgm');
-  const btn  = document.getElementById('bgm-mute');
-  bgm.muted  = !bgm.muted;
+
+function toggleMute(){
+  const bgm = document.getElementById('bgm');
+  const btn = document.getElementById('bgm-mute');
+  bgm.muted = !bgm.muted;
   btn.textContent = bgm.muted ? '✕' : '♪';
   btn.style.color = bgm.muted ? 'rgba(245,244,240,0.2)' : '';
 }
@@ -545,14 +528,14 @@ function unlock(){
 function changeVolume(val){
   const bgm = document.getElementById('bgm');
   bgm.volume = val;
-  bgm.muted  = (val == 0);
+  bgm.muted = (val == 0);
   document.getElementById('bgm-mute').textContent = (val == 0) ? '✕' : '♪';
 }
+
 document.getElementById('pw').addEventListener('keydown', e=>{
   if(e.key==='Enter') unlock();
 });
 
-// ── CONTENT ─────────────────────────────────
 const CHAPTERS = [
   {
     id:'intro',
@@ -591,127 +574,54 @@ const CHAPTERS = [
 <p><em>外縁より、この書を保管する</em></p>
     `
   },
-  {
-    id:'core',
-    glyph:'I',
-    label:'世界概要',
-    sublabel:'AO_CORE',
-    file:'AO_CORE'
-  },
-  {
-    id:'terms',
-    glyph:'II',
-    label:'用語集',
-    sublabel:'AO_TERMS',
-    file:'AO_TERMS'
-  },
-  {
-    id:'geography',
-    glyph:'III',
-    label:'地理',
-    sublabel:'AO_GEOGRAPHY',
-    file:'AO_GEOGRAPHY'
-  },
-  {
-    id:'primal',
-    glyph:'IV',
-    label:'原初の章',
-    sublabel:'AO_PRIMAL_CHAPTER',
-    file:'AO_PRIMAL_CHAPTER'
-  },
-  {
-    id:'liturgy',
-    glyph:'V',
-    label:'祝詞',
-    sublabel:'AO_LITURGY',
-    file:'AO_LITURGY'
-  },
-  {
-    id:'archive',
-    glyph:'VI',
-    label:'聖典記録',
-    sublabel:'AO_ARCHIVE',
-    file:'AO_ARCHIVE'
-  },
-  {
-    id:'gathering',
-    glyph:'VII',
-    label:'集会記録',
-    sublabel:'AO_GATHERING_RECORDS',
-    file:'AO_GATHERING_RECORDS'
-  }
+  { id:'core',     glyph:'I',    label:'世界概要', sublabel:'AO_CORE',              file:'AO_CORE' },
+  { id:'terms',    glyph:'II',   label:'用語集',   sublabel:'AO_TERMS',             file:'AO_TERMS' },
+  { id:'geography',glyph:'III',  label:'地理',     sublabel:'AO_GEOGRAPHY',         file:'AO_GEOGRAPHY' },
+  { id:'primal',   glyph:'IV',   label:'原初の章', sublabel:'AO_PRIMAL_CHAPTER',    file:'AO_PRIMAL_CHAPTER' },
+  { id:'liturgy',  glyph:'V',    label:'祝詞',     sublabel:'AO_LITURGY',           file:'AO_LITURGY' },
+  { id:'archive',  glyph:'VI',   label:'聖典記録', sublabel:'AO_ARCHIVE',           file:'AO_ARCHIVE' },
+  { id:'gathering',glyph:'VII',  label:'集会記録', sublabel:'AO_GATHERING_RECORDS', file:'AO_GATHERING_RECORDS' }
 ];
 
-// ── MARKDOWN PARSER (minimal) ────────────────
 function parseMarkdown(md){
   const lines = md.split('\n');
   let html = '';
   let inBlockquote = false;
-
   for(let i=0; i<lines.length; i++){
     let line = lines[i];
-
-    // blockquote
     if(line.startsWith('> ')){
       if(!inBlockquote){ html += '<blockquote>'; inBlockquote=true; }
       const inner = line.slice(2).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
       html += `<p>${inner}</p>`;
       continue;
-    } else if(inBlockquote){
-      html += '</blockquote>';
-      inBlockquote = false;
-    }
-
-    // headings
+    } else if(inBlockquote){ html += '</blockquote>'; inBlockquote=false; }
     if(line.startsWith('#### ')){ html += `<h3>${line.slice(5)}</h3>`; continue; }
     if(line.startsWith('### ')){ html += `<h3>${line.slice(4)}</h3>`; continue; }
     if(line.startsWith('## ')){ html += `<h2>${line.slice(3)}</h2>`; continue; }
     if(line.startsWith('# ')){ html += `<h1>${line.slice(2)}</h1>`; continue; }
-
-    // hr
-    if(line.trim() === '---' || line.trim() === '***'){ html += '<hr>'; continue; }
-
-    // list
-    if(line.startsWith('- ') || line.startsWith('・')){
+    if(line.trim()==='---'||line.trim()==='***'){ html += '<hr>'; continue; }
+    if(line.startsWith('- ')||line.startsWith('・')){
       let text = line.startsWith('- ') ? line.slice(2) : line.slice(1);
-      text = text
-        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g,'<em>$1</em>')
-        .replace(/`(.+?)`/g,'<code>$1</code>');
-      html += `<li>${text}</li>`;
-      continue;
+      text = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>');
+      html += `<li>${text}</li>`; continue;
     }
     if(/^\d+\. /.test(line)){
       let text = line.replace(/^\d+\. /,'');
-      text = text
-        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g,'<em>$1</em>')
-        .replace(/`(.+?)`/g,'<code>$1</code>');
-      html += `<li>${text}</li>`;
-      continue;
+      text = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>');
+      html += `<li>${text}</li>`; continue;
     }
-
-    // empty line
-    if(line.trim() === ''){ html += ''; continue; }
-
-    // inline formatting
-    line = line
-      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g,'<em>$1</em>')
-      .replace(/`(.+?)`/g,'<code>$1</code>');
-
+    if(line.trim()===''){  html += ''; continue; }
+    line = line.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>');
     html += `<p>${line}</p>`;
   }
   if(inBlockquote) html += '</blockquote>';
   return html;
 }
 
-// ── BUILD NAV & CHAPTERS ─────────────────────
-const nav = document.getElementById('nav');
+const nav  = document.getElementById('nav');
 const main = document.getElementById('main');
 
 CHAPTERS.forEach((ch,idx)=>{
-  // nav item
   const item = document.createElement('div');
   item.className = 'nav-section';
   item.innerHTML = `
@@ -724,36 +634,28 @@ CHAPTERS.forEach((ch,idx)=>{
     </div>`;
   nav.appendChild(item);
 
-  // chapter div
   const div = document.createElement('div');
-  div.className = 'chapter' + (idx===0?' active':'');
+  div.className = 'chapter'+(idx===0?' active':'');
   div.id = 'ch-'+ch.id;
 
   if(ch.content){
     div.innerHTML = ch.content;
   } else {
     div.innerHTML = `<div class="chapter-eyebrow">${ch.sublabel}</div><h1>${ch.label}</h1><p style="color:var(--fg-3);letter-spacing:0.2em;font-size:12px;">── 読み込み中 ──</p>`;
-    // MDファイルを同階層から fetch
-    fetch(ch.file + '.md')
+    fetch(ch.file+'.md')
       .then(r=>{ if(!r.ok) throw new Error(); return r.text(); })
-      .then(md=>{
-        div.innerHTML = `<div class="chapter-eyebrow">${ch.sublabel}</div>` + parseMarkdown(md);
-      })
-      .catch(()=>{
-        div.innerHTML = `<div class="chapter-eyebrow">${ch.sublabel}</div><h1>${ch.label}</h1><p style="color:var(--fg-3);letter-spacing:0.15em;font-size:12px;">── このファイルは同じフォルダに MDファイルを置くことで表示されます ──</p>`;
-      });
+      .then(md=>{ div.innerHTML = `<div class="chapter-eyebrow">${ch.sublabel}</div>`+parseMarkdown(md); })
+      .catch(()=>{ div.innerHTML = `<div class="chapter-eyebrow">${ch.sublabel}</div><h1>${ch.label}</h1><p style="color:var(--fg-3);letter-spacing:0.15em;font-size:12px;">── このファイルは同じフォルダに MDファイルを置くことで表示されます ──</p>`; });
   }
   main.appendChild(div);
 });
 
-// ── NAVIGATION ───────────────────────────────
-function showChapter(id, el){
+function showChapter(id,el){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('ch-'+id).classList.add('active');
   document.getElementById('main').scrollTop = 0;
-  // mobile: close sidebar
   document.getElementById('sidebar').classList.remove('open');
 }
 
