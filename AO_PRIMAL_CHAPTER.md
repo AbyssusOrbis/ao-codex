@@ -6415,18 +6415,15 @@ Liminarisが、
 **ひとつの完結した構造**を、
 獲得した。
 
----
+Latens。
+AlbielleとAtramelle。
+LuceatとTenebris。
+Resonantia。
+そして、外縁のLiminaris。
 
-> Latens（潜在）
-> AlbielleとAtramelle（原初の対）
-> LuceatとTenebris（旅する継承者）
-> Resonantia（響きそのものを宿す者）
-> Liminaris（外縁の記録者）
-> 
-> 五つの祝詞。
-> ふたつの拾われた響き── SolitusとMemoria。
-
----
+五つの祝詞と、
+SolitusとMemoria、
+ふたつの拾われた響き。
 
 これらが、
 原初の章を通じて、
