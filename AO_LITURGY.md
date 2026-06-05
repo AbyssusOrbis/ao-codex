@@ -36,7 +36,8 @@ Abyssus Orbisの根本を最も短く、
 最も澄んだ形で語る言葉として、
 聖典の中核に独立して保管される。
 
-詳細はAO_ARCHIVE.md 第三部を参照。
+各祝詞の物語上の文脈は、AO_PRIMAL_CHAPTER.md の該当節を参照。
+祝詞の構造的要約は、AO_ARCHIVE.md 第三部を参照。
 
 ---
 
