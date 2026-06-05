@@ -130,6 +130,7 @@ LuceatとTenebrisは旅に出て、
 聖典として保管している。
 
 詳細は AO_TERMS.md および AO_ARCHIVE.md 第二部を参照。
+完全な物語本文は、AO_PRIMAL_CHAPTER.md を参照。
 
 ## 9. 禁則事項
 ・安易な厨二病表現
